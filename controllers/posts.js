@@ -39,7 +39,8 @@ export const getPostsBySearch = async (req,res) => {
     try {
         const title = new RegExp(searchQuery, 'i') // i means ignore case
 
-        const posts = await PostMessage.find({$or: [ { title }, { tags: { $in: tags.split(',')}} ]})
+        const posts = await PostMessage.find({$or: [ { title }, { tags: { $in: tags.split(',')}} ]}).sort({'likes':1})
+
 
         // console.log(posts)
         res.json({data: posts})
